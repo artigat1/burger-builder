@@ -4,11 +4,19 @@ import classes from './Burger.module.css';
 import BurgerIngredient from './BurgerIngredient/BurgerIngredent';
 
 const burger = (props) => {
+	// We get an object and not an array.
+	// First create an empty array with the correct number of elements from the object
+	// The key is the name of the ingredient and must match the type in the switch statement in BurgerIngredient
+	const transformedIngredients = Object.keys(props.ingredients).map((igKey) => {
+		return [ ...Array(props.ingredients[igKey]) ].map((_, idx) => {
+			return <BurgerIngredient key={igKey + idx} type={igKey} />;
+		});
+	});
+
 	return (
 		<div className={classes.Burger}>
 			<BurgerIngredient type="bread-top" />
-			<BurgerIngredient type="cheese" />
-			<BurgerIngredient type="meat" />
+			{transformedIngredients}
 			<BurgerIngredient type="bread-bottom" />
 		</div>
 	);

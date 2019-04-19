@@ -8,7 +8,8 @@ const withErrorHandler = (WrappedComponent, axios) => {
             error: undefined,
         };
 
-        componentDidMount() {
+        constructor(props) {
+            super(props);
             axios.interceptors.request.use(req => {
                 this.setState({ error: undefined });
                 return req;

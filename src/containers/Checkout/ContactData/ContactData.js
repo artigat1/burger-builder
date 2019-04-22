@@ -5,6 +5,7 @@ import Button from '../../../components/UI/Button/Button';
 import classes from './ContactData.module.css';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
+import { connect } from 'react-redux';
 
 class ContactData extends Component {
     state = {
@@ -19,6 +20,21 @@ class ContactData extends Component {
                 validation: {
                     required: true,
                     message: 'Please enter your name',
+                },
+                valid: false,
+                touched: false,
+            },
+            houseNumber: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your house number',
+                },
+                value: '',
+                validation: {
+                    required: true,
+                    isNumeric: true,
+                    message: 'Please enter your house number (must be numeric)',
                 },
                 valid: false,
                 touched: false,
@@ -109,7 +125,7 @@ class ContactData extends Component {
         }
 
         const order = {
-            ingredients: this.props.ingredients,
+            ingredients: this.props.ings,
             price: this.props.price,
             orderData: formData,
         };
@@ -163,6 +179,11 @@ class ContactData extends Component {
 
         if (rules.maxLength) {
             isValid = value.length <= rules.maxLength && isValid;
+        }
+
+        if (rules.isNumeric) {
+            const pattern = /^\d+$/;
+            isValid = pattern.test(value) && isValid;
         }
         return isValid;
     }
@@ -220,4 +241,11 @@ class ContactData extends Component {
     }
 }
 
-export default ContactData;
+const mapStateToProps = state => {
+    return {
+        ings: state.ingredients,
+        price: state.totalPrice,
+    };
+};
+
+export default connect(mapStateToProps)(ContactData);

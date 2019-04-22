@@ -5,21 +5,29 @@ import classes from './Input.module.css';
 const input = props => {
     let inputElement = undefined;
 
-    switch (props.inputtype) {
+    switch (props.elementType) {
         case 'input':
             inputElement = (
-                <input className={classes.InputElement} {...props} />
+                <input
+                    className={classes.InputElement}
+                    {...props.elementConfig}
+                    value={props.value}
+                />
             );
             break;
 
         case 'textarea':
             inputElement = (
-                <textarea className={classes.InputElement} {...props} />
+                <textarea
+                    className={classes.InputElement}
+                    {...props.elementConfig}
+                    value={props.value}
+                />
             );
             break;
 
         default:
-            throw Error(`did not recognise input type ${props.type}`);
+            throw Error(`Did not recognise input type ${props.elementType}`);
     }
 
     return (

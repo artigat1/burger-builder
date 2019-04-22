@@ -18,6 +18,7 @@ class ContactData extends Component {
                 value: '',
                 validation: {
                     required: true,
+                    message: 'Please enter your name',
                 },
                 valid: false,
                 touched: false,
@@ -31,6 +32,7 @@ class ContactData extends Component {
                 value: '',
                 validation: {
                     required: true,
+                    message: 'Please enter your street',
                 },
                 valid: false,
                 touched: false,
@@ -46,6 +48,7 @@ class ContactData extends Component {
                     required: true,
                     minLength: 5,
                     maxLength: 8,
+                    message: 'Please enter your postcode',
                 },
                 valid: false,
                 touched: false,
@@ -59,6 +62,7 @@ class ContactData extends Component {
                 value: '',
                 validation: {
                     required: true,
+                    message: 'Please enter your country',
                 },
                 valid: false,
                 touched: false,
@@ -72,6 +76,7 @@ class ContactData extends Component {
                 value: '',
                 validation: {
                     required: true,
+                    message: 'Please enter your email',
                 },
                 valid: false,
                 touched: false,
@@ -134,6 +139,10 @@ class ContactData extends Component {
     checkValidity(value, rules) {
         let isValid = true;
 
+        if (!rules) {
+            return isValid;
+        }
+
         if (rules.required) {
             isValid = value.trim() !== '' && isValid;
         }
@@ -169,8 +178,17 @@ class ContactData extends Component {
                             this.inputChangedHandler(event, el.id)
                         }
                         invalid={!el.config.valid}
-                        shouldValidate={el.config.validation}
+                        shouldValidate={
+                            el.config.validation
+                                ? el.config.validation.required
+                                : false
+                        }
                         touched={el.config.touched}
+                        errorMessage={
+                            el.config.validation
+                                ? el.config.validation.message
+                                : ''
+                        }
                     />
                 ))}
                 <Button btnType="Success">ORDER</Button>

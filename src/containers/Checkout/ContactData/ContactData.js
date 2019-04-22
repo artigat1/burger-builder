@@ -20,6 +20,7 @@ class ContactData extends Component {
                     required: true,
                 },
                 valid: false,
+                touched: false,
             },
             street: {
                 elementType: 'input',
@@ -32,6 +33,7 @@ class ContactData extends Component {
                     required: true,
                 },
                 valid: false,
+                touched: false,
             },
             postcode: {
                 elementType: 'input',
@@ -46,6 +48,7 @@ class ContactData extends Component {
                     maxLength: 8,
                 },
                 valid: false,
+                touched: false,
             },
             country: {
                 elementType: 'input',
@@ -58,6 +61,7 @@ class ContactData extends Component {
                     required: true,
                 },
                 valid: false,
+                touched: false,
             },
             email: {
                 elementType: 'input',
@@ -70,6 +74,7 @@ class ContactData extends Component {
                     required: true,
                 },
                 valid: false,
+                touched: false,
             },
             deliveryMethod: {
                 elementType: 'select',
@@ -80,7 +85,6 @@ class ContactData extends Component {
                     ],
                 },
                 value: '',
-                valid: false,
             },
         },
         loading: false,
@@ -122,7 +126,7 @@ class ContactData extends Component {
             updatedFormElement.value,
             updatedFormElement.validation,
         );
-        console.log(updatedFormElement);
+        updatedFormElement.touched = true;
         updatedOrderForm[inputId] = updatedFormElement;
         this.setState({ orderForm: updatedOrderForm });
     };
@@ -164,6 +168,9 @@ class ContactData extends Component {
                         changed={event =>
                             this.inputChangedHandler(event, el.id)
                         }
+                        invalid={!el.config.valid}
+                        shouldValidate={el.config.validation}
+                        touched={el.config.touched}
                     />
                 ))}
                 <Button btnType="Success">ORDER</Button>

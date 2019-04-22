@@ -6,7 +6,7 @@ import { createStore } from 'redux';
 
 import './index.css';
 import App from './App';
-import reducer from './store/reducer';
+import reducer from './store/burgerBuilder';
 import * as serviceWorker from './serviceWorker';
 
 const store = createStore(

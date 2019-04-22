@@ -8,12 +8,20 @@ import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import { addIngredient, removeIngredient } from '../../store/actions';
+import {
+    addIngredient,
+    initIngredients,
+    removeIngredient,
+} from '../../store/actions';
 
 class BurgerBuilder extends Component {
     state = {
         purchasing: false,
     };
+
+    componentDidMount() {
+        this.props.onInitIngredients();
+    }
 
     updatePurchaseState(ingredients) {
         const sum = Object.keys(ingredients)
@@ -51,7 +59,7 @@ class BurgerBuilder extends Component {
 
         let orderSummary = undefined;
 
-        let burger = this.state.error ? (
+        let burger = this.props.error ? (
             <p>ingredients cannot be loaded</p>
         ) : (
             <Spinner />
@@ -99,11 +107,13 @@ const mapStateToProps = state => {
     return {
         ings: state.ingredients,
         price: state.totalPrice,
+        error: state.error,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        onInitIngredients: () => dispatch(initIngredients()),
         onIngredientAdded: ingredientName =>
             dispatch(addIngredient(ingredientName)),
         onIngredientRemoved: ingredientName =>

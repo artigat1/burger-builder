@@ -13,16 +13,7 @@ import { addIngredient, removeIngredient } from '../../store/actions';
 class BurgerBuilder extends Component {
     state = {
         purchasing: false,
-        loading: false,
-        error: false,
     };
-
-    componentDidMount() {
-        // axios
-        //     .get('/ingredients.json')
-        //     .then(response => this.setState({ ingredients: response.data }))
-        //     .catch(err => this.setState({ error: true }));
-    }
 
     updatePurchaseState(ingredients) {
         const sum = Object.keys(ingredients)
@@ -88,10 +79,6 @@ class BurgerBuilder extends Component {
                     totalPrice={this.props.price}
                 />
             );
-        }
-
-        if (this.state.loading) {
-            orderSummary = <Spinner />;
         }
 
         return (

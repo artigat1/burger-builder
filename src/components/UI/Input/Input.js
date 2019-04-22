@@ -27,7 +27,14 @@ const input = props => {
             break;
 
         default:
-            throw Error(`Did not recognise input type ${props.elementType}`);
+            inputElement = (
+                <input
+                    className={classes.InputElement}
+                    {...props.elementConfig}
+                    value={props.value}
+                />
+            );
+            break;
     }
 
     return (

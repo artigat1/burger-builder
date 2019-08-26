@@ -8,7 +8,7 @@ export const INGREDIENT_PRICES = {
 };
 
 const initialState = {
-    ingredients: {},
+    ingredients: null,
     totalPrice: 4,
     error: false,
 };

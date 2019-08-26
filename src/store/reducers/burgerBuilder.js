@@ -7,9 +7,11 @@ export const INGREDIENT_PRICES = {
     bacon: 0.7,
 };
 
+const initialPrice = 4;
+
 const initialState = {
     ingredients: null,
-    totalPrice: 4,
+    totalPrice: initialPrice,
     error: false,
 };
 
@@ -48,6 +50,7 @@ const reducer = (state = initialState, action) => {
                     cheese: action.ingredients.cheese,
                     meat: action.ingredients.meat,
                 },
+                totalPrice: initialPrice,
                 error: false,
             };
 

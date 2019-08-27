@@ -6,3 +6,21 @@
     margin: 10px auto;
     box-sizing: border-box;
 }
+
+.DeleteButton {
+    display: block;
+    font: inherit;
+    padding: 5px;
+    margin: 0 5px;
+    width: 80px;
+    border: 1px solid #aa6817;
+    cursor: pointer;
+    outline: none;
+}
+
+.DeleteButton:hover,
+.DeleteButton:active {
+    background-color: red;
+    border: 1px solid #966909;
+    color: #fff;
+}

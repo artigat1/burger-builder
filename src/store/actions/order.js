@@ -34,7 +34,6 @@ export const purchaseBurger = (orderData) => {
         axios
             .post('/orders.json', orderData)
             .then((response) => {
-                console.log(response.data);
                 dispatch(purchaseBurgerSuccess(response.data.name, orderData));
             })
             .catch(err => {
@@ -80,6 +79,39 @@ export const fetchOrders = () => {
             })
             .catch(err => {
                 dispatch(fetchOrdersFail(err));
+            });
+    }
+};
+
+export const deleteOrderStart = () => {
+    return {
+        type: actionTypes.DELETE_ORDER_START,
+    }
+};
+
+export const deleteOrderFail = () => {
+    return {
+        type: actionTypes.DELETE_ORDER_FAIL,
+    };
+};
+
+export const deleteOrderSuccess = (id) => {
+    return {
+        type: actionTypes.DELETE_ORDER_SUCCESS,
+        id
+    };
+};
+
+export const deleteOrder = (id) => {
+    return dispatch => {
+        dispatch(deleteOrderStart());
+        axios
+            .delete(`/orders/${id}.json`)
+            .then(response => {
+                dispatch(deleteOrderSuccess(id))
+            })
+            .catch(error => {
+                dispatch(deleteOrderFail(error));
             });
     }
 };

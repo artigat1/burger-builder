@@ -38,6 +38,9 @@ const order = props => {
                     &pound;{Number.parseFloat(props.price).toFixed(2)}
                 </strong>
             </p>
+            <p>
+                <button className={classes.DeleteButton} onClick={() => props.deleteOrder(props.id)}>DELETE</button>
+            </p>
         </div>
     );
 };
